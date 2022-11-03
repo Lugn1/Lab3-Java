@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.iths.java22.labb3.labb3williamkarlstrom.controller.Controller">
+
+
+    <HBox layoutX="22.0" layoutY="14.0">
+        <Spinner fx:id="spinner" editable="true" prefHeight="25.0" prefWidth="100.0" />
+
+        <ColorPicker fx:id="colorPicker" prefHeight="25.0" prefWidth="95.0" />
+    </HBox>
+
+
+<HBox layoutX="22.0" layoutY="46.0">
+    <Button fx:id="rectangleButton" text="Rectangle" />
+    <Button fx:id="circleButton" prefHeight="25.0" prefWidth="59.0" text="Circle" />
+    <Button fx:id="squareButton" prefHeight="25.0" prefWidth="62.0" text="Square" />
+</HBox>
+    <Canvas fx:id="canvas" height="715.0" layoutY="85.0" onMouseClicked="#canvasClicked" width="667.0" />
+ <CheckBox fx:id="checkBox" layoutX="247.0" layoutY="14.0" prefHeight="25.0" text="Select Mode" />
+   <ListView fx:id="listViewTest" layoutX="514.0" layoutY="85.0" prefHeight="260.0" prefWidth="139.0" />
+   <Button fx:id="undoButton" layoutX="553.0" layoutY="46.0" mnemonicParsing="false" onMouseClicked="#undoLast" text="Undo" />
+   <HBox layoutX="247.0" layoutY="46.0" prefHeight="25.0" prefWidth="221.0">
+      <children>
+         <Button fx:id="changeColorButton" mnemonicParsing="false" text="Change Color" onMouseClicked="#changeColorOnSelectedShapes" />
+         <Button fx:id="changeSizeButton" mnemonicParsing="false" text="Change Size" onMouseClicked="#changeSizeOnSelectedShapes"/>
+         <Button fx:id="deleteButton" mnemonicParsing="false" onMouseClicked="#deleteMarkedShapes" text="Delete" />
+      </children>
+   </HBox>
+
+<!--    <stylesheets>-->
+<!--        <URL value="@lab3.css"/>-->
+<!--    </stylesheets>-->
+
+</AnchorPane>
