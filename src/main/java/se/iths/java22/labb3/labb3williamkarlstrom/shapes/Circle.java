@@ -1,27 +1,28 @@
-package se.iths.java22.labb3.labb3williamkarlstrom.model;
+package se.iths.java22.labb3.labb3williamkarlstrom.shapes;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Square extends Shape{
+public class Circle extends Shape {
 
-    public Square(Color color, double xPosition, double yPosition, double size) {
+
+    public Circle(Color color, double xPosition, double yPosition, double size) {
         super(color, xPosition, yPosition, size);
     }
 
-//    public Square(Shape shape) {
-//        super(shape);
-//    }
+    public Circle(Shape shape) {
+        super(shape);
+    }
 
 
     public void draw(GraphicsContext context){
         context.setFill(getBorderColor());
-        context.fillRect(getxPosition() - getSize()/2,
+        context.fillOval(getxPosition() - getSize()/2,
                 getyPosition() - getSize()/2,getSize(),getSize());
 
         context.setFill(this.getColor());
-        context.fillRect(getxPosition() - getSize()/2 + 2,
-                getyPosition()- getSize()/2 + 2,getSize() - 4,getSize() - 4);
+        context.fillOval(getxPosition() - getSize()/2 + 2,
+                getyPosition() - getSize()/2 + 2,getSize() - 4,getSize() - 4);
     }
 
 
@@ -30,10 +31,13 @@ public class Square extends Shape{
         double xPosition = getxPosition() - getSize()/2;
         double yPosition = getyPosition() - getSize()/2;
 
-        return xMousePos >= xPosition && xMousePos <= xPosition + (getSize() * 2) &&
+        return xMousePos >= xPosition && xMousePos <= xPosition + getSize() &&
                 yMousePos >= yPosition &&
                 yMousePos <= yPosition + getSize();
     }
+
+    @Override
+    public Shape copyShape() {
+        return new Circle(this);
+    }
 }
-
-

@@ -1,12 +1,9 @@
-package se.iths.java22.labb3.labb3williamkarlstrom.model;
+package se.iths.java22.labb3.labb3williamkarlstrom.shapes;
 
-import javafx.beans.Observable;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -18,6 +15,8 @@ public abstract class Shape {
     private final DoubleProperty xPosition = new SimpleDoubleProperty();
     private final DoubleProperty yPosition = new SimpleDoubleProperty();
     private final DoubleProperty size = new SimpleDoubleProperty();
+
+
 
     public double getSize() {
         return size.get();
@@ -39,12 +38,12 @@ public abstract class Shape {
         setBorderColor(Color.TRANSPARENT);
     }
 
-    // public Shape(Shape shape){
-//        setColor(Color.TRANSPARENT);
-//        setSize(shape.getSize());
-//        setxPosition(shape.getxPosition());
-//        setyPosition(shape.getyPosition());
-    //   }
+     public Shape(Shape shape){
+        setColor(shape.getColor());
+        setSize(shape.getSize());
+        setxPosition(shape.getxPosition());
+        setyPosition(shape.getyPosition());
+       }
 
     public Color getColor() {
         return color.get();
@@ -97,14 +96,6 @@ public abstract class Shape {
         return borderColor;
     }
 
-//    public void setBorderColorOnSelected(){
-//        setBorderColor(Color.BLACK);
-//    }
-//    public void setBorderColorOnDeselected() {
-//        setBorderColor(Color.TRANSPARENT);
-//    }
-
     public abstract boolean checkIfInsideShape(double x, double y);
-
-
+    public abstract Shape copyShape();
 }

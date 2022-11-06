@@ -9,4 +9,6 @@ module se.iths.java22.labb3.labb3williamkarlstrom {
     opens se.iths.java22.labb3.labb3williamkarlstrom.controller to javafx.fxml;
     exports se.iths.java22.labb3.labb3williamkarlstrom.model;
     opens se.iths.java22.labb3.labb3williamkarlstrom.model to javafx.fxml;
+    exports se.iths.java22.labb3.labb3williamkarlstrom.shapes;
+    opens se.iths.java22.labb3.labb3williamkarlstrom.shapes to javafx.fxml;
 }

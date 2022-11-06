@@ -5,10 +5,13 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import se.iths.java22.labb3.labb3williamkarlstrom.controller.Controller;
-import se.iths.java22.labb3.labb3williamkarlstrom.model.Shape;
+import se.iths.java22.labb3.labb3williamkarlstrom.shapes.Circle;
+import se.iths.java22.labb3.labb3williamkarlstrom.shapes.Rectangle;
+import se.iths.java22.labb3.labb3williamkarlstrom.shapes.Shape;
+import se.iths.java22.labb3.labb3williamkarlstrom.shapes.Square;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -21,8 +24,7 @@ public class Model {
 
     public ObservableList<Shape> shapes;
     public ObservableList<Shape> selectedShapes;
-
-    public Deque<Shape> undoShapeDeque;
+    public Deque<ObservableList<Shape>> undoShapeDeque;
 
     public ObservableList<Shape> getSelectedShapes() {
         return selectedShapes;
@@ -30,6 +32,7 @@ public class Model {
 
     public void setSelectedShapes(ObservableList<Shape> selectedShapes) {
         this.selectedShapes = selectedShapes;
+
     }
 
     public ObservableList<Shape> getShapes() {
@@ -52,7 +55,7 @@ public class Model {
         shape.setBorderColor(Color.BLACK);
     }
     public void setBorderColorOnDeselected(Shape shape) {
-        shape.setBorderColor(Color.WHITE);
+        shape.setBorderColor(Color.TRANSPARENT);
     }
 
     public ObjectProperty<Color> borderColorProperty() {
@@ -78,6 +81,7 @@ public class Model {
 
         this.undoShapeDeque = new ArrayDeque<>();
         this.selectedShapes = FXCollections.observableArrayList();
+
     }
 
     public ObjectProperty<Color> colorProperty() {
@@ -119,5 +123,54 @@ public class Model {
             shape.setSize(getSize());
         }
     }
+
+    public void addCircleToObservableList(double xPosition, double yPosition) {
+        shapes.add(new Circle(getColor(), xPosition, yPosition, getSize()));
+    }
+
+    public void addRectangleToObservableList(double xPosition, double yPosition) {
+        shapes.add(new Rectangle(getColor(), xPosition, yPosition, getSize()));
+    }
+
+    public void addSquareToObservableList(double xPosition, double yPosition) {
+        shapes.add(new Square(getColor(), xPosition, yPosition, getSize()));
+    }
+
+    public void undo() {
+        if (undoShapeDeque.isEmpty()){
+            System.out.println("deque IS EMPTY");
+            return;
+        }
+
+        shapes.clear();
+        shapes.addAll(undoShapeDeque.removeLast());
+
+    }
+
+    private void addToTemporaryList() {
+        ObservableList<Shape> tempShapeList;
+    }
+
+    public ObservableList<Shape> getTemporaryList(){
+        ObservableList<Shape> temporaryList = FXCollections.observableArrayList();
+
+        for (var shape : shapes) {
+            temporaryList.add(shape.copyShape());
+        }
+
+        return temporaryList;
+    }
+
+    public void addToUndoDeque() {
+        ObservableList<Shape> temporaryList = getTemporaryList();
+        undoShapeDeque.addLast(temporaryList);
+    }
+
+    public void drawShapes(GraphicsContext context) {
+        for (var shape : shapes) {
+            shape.draw(context);
+        }
+    }
+
 
 }

@@ -1,4 +1,4 @@
-package se.iths.java22.labb3.labb3williamkarlstrom.model;
+package se.iths.java22.labb3.labb3williamkarlstrom.shapes;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -8,6 +8,10 @@ public class Rectangle extends Shape {
 
     public Rectangle(Color color, double xPosition, double yPosition, double size) {
         super(color, xPosition, yPosition, size);
+    }
+
+    public Rectangle(Shape shape){
+        super(shape);
     }
 
     public void draw(GraphicsContext context){
@@ -29,5 +33,10 @@ public class Rectangle extends Shape {
         return xMousePos >= xPosition && xMousePos <= xPosition + (getSize() * 2) &&
                 yMousePos >= yPosition &&
                 yMousePos <= yPosition + getSize();
+    }
+
+    @Override
+    public Shape copyShape(){
+        return new Rectangle(this);
     }
 }

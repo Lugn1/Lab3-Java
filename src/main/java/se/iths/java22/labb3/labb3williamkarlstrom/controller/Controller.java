@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import se.iths.java22.labb3.labb3williamkarlstrom.model.*;
+import se.iths.java22.labb3.labb3williamkarlstrom.shapes.Shape;
 
 
 public class Controller {
@@ -57,20 +58,25 @@ public class Controller {
 
 
     private void drawShapes() {
-        for (var shape : model.shapes) {
-            shape.draw(context);
-        }
+        model.drawShapes(context);
+    }
+
+    public void canvasChanged(){
+        //   drawShapes(); TODO onListChanged-observer
     }
 
     public void canvasClicked(MouseEvent mouseEvent) {
+
         drawOnClick(mouseEvent);
-        listViewTest.getSelectionModel();
+        renderCanvas();
         drawShapes();
+
     }
 
     private void renderCanvas() {
         context.setFill(Color.WHITE);
         context.fillRect(0, 0, 667, 715);
+
     }
 
     public void drawOnClick(MouseEvent mouseEvent) {
@@ -90,11 +96,11 @@ public class Controller {
     private void AddShapeType(Double x, double y) {
 
         if (circleButton.isFocused()) {
-            addCircleToObservableList(x, y);
+            model.addCircleToObservableList(x, y);
         } else if (squareButton.isFocused()) {
-            addSquareToObservableList(x, y);
+            model.addSquareToObservableList(x, y);
         } else if (rectangleButton.isFocused()) {
-            addRectangleToObservableList(x, y);
+            model.addRectangleToObservableList(x, y);
         }
     }
 
@@ -103,51 +109,36 @@ public class Controller {
         if (model.selectedShapes.contains(shape)) {
             model.setBorderColorOnDeselected(shape);
             model.selectedShapes.remove(shape);
-            // TODO model.unselectShape(shape);
         } else {
             model.setBorderColorOnSelected(shape);
             model.selectedShapes.add(shape);
-            // TODO  model.selectShape();
+
         }
     }
 
-    // TODO Skicka över data metoder till model
-    private void addCircleToObservableList(double xPosition, double yPosition) {
-        model.shapes.add(new Circle(model.getColor(), xPosition, yPosition, model.getSize()));
-        shapeObservableList.add(new Circle(model.getColor(), xPosition, yPosition, model.getSize()));
-    }
-
-    private void addRectangleToObservableList(double xPosition, double yPosition) {
-        model.shapes.add(new Rectangle(model.getColor(), xPosition, yPosition, model.getSize()));
-        shapeObservableList.add(new Rectangle(model.getColor(), xPosition, yPosition, model.getSize()));
-    }
-
-    private void addSquareToObservableList(double xPosition, double yPosition) {
-        model.shapes.add(new Square(model.getColor(), xPosition, yPosition, model.getSize()));
-        shapeObservableList.add(new Square(model.getColor(), xPosition, yPosition, model.getSize()));
-    }
-
-    public void deleteMarkedShapes() {
-        model.undoShapeDeque.addAll(model.selectedShapes);
-        model.deleteSelectedShapes();
-        renderCanvas();
-        drawShapes();
-    }
-
     public void undoLast() {
-        model.shapes.addAll(model.undoShapeDeque.removeLast());
+        model.undo();
         renderCanvas();
         drawShapes();
     }
 
     public void changeColorOnSelectedShapes() {
+        model.addToUndoDeque();
         model.changeColorOnShapes();
         renderCanvas();
         drawShapes();
     }
 
     public void changeSizeOnSelectedShapes() {
+        model.addToUndoDeque();
         model.changeSizeOnShapes();
+        renderCanvas();
+        drawShapes();
+    }
+
+    public void deleteMarkedShapes() {
+        model.addToUndoDeque();
+        model.deleteSelectedShapes();
         renderCanvas();
         drawShapes();
     }
