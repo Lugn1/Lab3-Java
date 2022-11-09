@@ -39,6 +39,18 @@ public class Square extends Shape {
     public Shape copyShape() {
         return new Circle(this);
     }
+
+
+    @Override
+    public String writeSVG() {
+        String svgColorCode = "#" + getColor().toString().substring(2,10);
+        return "<rect fill=\"" + svgColorCode + "\"" +
+                " width=\"" + getSize() + "\"" +
+                " height=\"" + getSize() + "\"" +
+                " x=\"" + getxPosition()  + "\"" +
+                " y=\"" + getyPosition()  + "\" />";
+
+    }
 }
 
 

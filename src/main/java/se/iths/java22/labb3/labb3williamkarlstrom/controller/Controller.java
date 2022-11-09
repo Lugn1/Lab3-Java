@@ -2,14 +2,19 @@ package se.iths.java22.labb3.labb3williamkarlstrom.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import se.iths.java22.labb3.labb3williamkarlstrom.model.*;
 import se.iths.java22.labb3.labb3williamkarlstrom.shapes.Shape;
+import se.iths.java22.labb3.labb3williamkarlstrom.svg.SVGWriter;
+
+import java.util.ArrayList;
 
 
 public class Controller {
@@ -32,6 +37,8 @@ public class Controller {
     public GraphicsContext context;
 
     public Model model;
+    public Button changeSizeButton;
+
 
     ObservableList<Shape> shapeObservableList = FXCollections.observableArrayList();
 
@@ -54,6 +61,7 @@ public class Controller {
         renderCanvas();
 
         listViewTest.setItems(model.shapes);
+
     }
 
 
@@ -141,5 +149,15 @@ public class Controller {
         model.deleteSelectedShapes();
         renderCanvas();
         drawShapes();
+    }
+
+    public void saveFile(ActionEvent actionEvent) {
+    }
+
+    public void saveToFile(MouseEvent mouseEvent) {
+        SVGWriter svgFile = new SVGWriter();
+        svgFile.saveToFile(model);
+
+
     }
 }

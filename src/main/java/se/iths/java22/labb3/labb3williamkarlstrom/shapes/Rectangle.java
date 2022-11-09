@@ -39,4 +39,18 @@ public class Rectangle extends Shape {
     public Shape copyShape(){
         return new Rectangle(this);
     }
+
+
+    @Override
+    public String writeSVG() {
+        String svgColorCode = "#" + getColor().toString().substring(2,10);
+
+        return "<rect fill=\"" + svgColorCode +
+                "\" width=\"" + (getSize() * 2) +
+                "\" height=\"" + getSize() +
+                "\" x=\"" + getxPosition() +
+                "\" y=\"" + getyPosition() +
+                "\" />";
+
+    }
 }

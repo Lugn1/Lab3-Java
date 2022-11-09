@@ -98,4 +98,6 @@ public abstract class Shape {
 
     public abstract boolean checkIfInsideShape(double x, double y);
     public abstract Shape copyShape();
+
+    public abstract String writeSVG();
 }

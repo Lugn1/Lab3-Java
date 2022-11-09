@@ -40,4 +40,14 @@ public class Circle extends Shape {
     public Shape copyShape() {
         return new Circle(this);
     }
+
+    @Override
+    public String writeSVG() {
+        String svgColorCode = "#" + getColor().toString().substring(2,10);
+        return "<circle fill=\"" + svgColorCode + "\"" +
+                " r=\"" + getSize() / 2 + "\"" +
+                " cx=\"" + (getxPosition() + getSize() / 2) +  "\"" +
+                " cy=\"" + (getyPosition() + getSize() / 2) + "\" />";
+
+    }
 }
