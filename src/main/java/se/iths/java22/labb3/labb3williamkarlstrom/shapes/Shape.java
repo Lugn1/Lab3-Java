@@ -32,8 +32,8 @@ public abstract class Shape {
 
     public Shape(Color color, double xPosition, double yPosition, double size) {
         setColor(color);
-        setxPosition(xPosition);
-        setyPosition(yPosition);
+        setXPosition(xPosition);
+        setYPosition(yPosition);
         setSize(size);
         setBorderColor(Color.TRANSPARENT);
     }
@@ -41,8 +41,8 @@ public abstract class Shape {
      public Shape(Shape shape){
         setColor(shape.getColor());
         setSize(shape.getSize());
-        setxPosition(shape.getxPosition());
-        setyPosition(shape.getyPosition());
+        setXPosition(shape.getXPosition());
+        setYPosition(shape.getYPosition());
        }
 
     public Color getColor() {
@@ -57,7 +57,7 @@ public abstract class Shape {
         this.color.set(color);
     }
 
-    public double getxPosition() {
+    public double getXPosition() {
         return xPosition.get();
     }
 
@@ -65,11 +65,11 @@ public abstract class Shape {
         return xPosition;
     }
 
-    public void setxPosition(double xPosition) {
+    public void setXPosition(double xPosition) {
         this.xPosition.set(xPosition);
     }
 
-    public double getyPosition() {
+    public double getYPosition() {
         return yPosition.get();
     }
 
@@ -77,7 +77,7 @@ public abstract class Shape {
         return yPosition;
     }
 
-    public void setyPosition(double yPosition) {
+    public void setYPosition(double yPosition) {
         this.yPosition.set(yPosition);
     }
 

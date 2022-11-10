@@ -1,6 +1,5 @@
 package se.iths.java22.labb3.labb3williamkarlstrom.model;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;

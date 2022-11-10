@@ -24,17 +24,15 @@
 </HBox>
     <Canvas fx:id="canvas" height="715.0" layoutY="85.0" onMouseClicked="#canvasClicked" width="667.0" />
  <CheckBox fx:id="checkBox" layoutX="247.0" layoutY="14.0" prefHeight="25.0" text="Select Mode" />
-   <ListView fx:id="listViewTest" layoutX="514.0" layoutY="85.0" prefHeight="260.0" prefWidth="139.0" />
+<!--   <ListView fx:id="listViewTest" layoutX="514.0" layoutY="85.0" prefHeight="260.0" prefWidth="139.0" /> -->
    <Button fx:id="undoButton" layoutX="491.0" layoutY="46.0" mnemonicParsing="false" onMouseClicked="#undoLast" text="Undo" />
    <HBox layoutX="247.0" layoutY="46.0" prefHeight="25.0" prefWidth="231.0">
-      <children>
          <Button fx:id="changeColorButton" mnemonicParsing="false" onMouseClicked="#changeColorOnSelectedShapes" text="Change Color" />
          <Button fx:id="changeSizeButton" mnemonicParsing="false" onMouseClicked="#changeSizeOnSelectedShapes" text="Change Size" />
          <Button fx:id="deleteButton" mnemonicParsing="false" onMouseClicked="#deleteMarkedShapes" prefHeight="25.0" prefWidth="54.0" text="Delete" textFill="RED" wrapText="true">
             <font>
                <Font name="System Bold" size="12.0" />
             </font></Button>
-      </children>
    </HBox>
    <Button layoutX="591.0" layoutY="46.0" mnemonicParsing="false" text="Save File" onMouseClicked="#saveToFile" />
 

@@ -17,51 +17,25 @@ import java.util.Deque;
 
 public class Model {
 
-
     private final ObjectProperty<Color> color;
-    private final ObjectProperty<Color> borderColor;
     private final ObjectProperty<Integer> size;
-
     public ObservableList<Shape> shapes;
     public ObservableList<Shape> selectedShapes;
     public Deque<ObservableList<Shape>> undoShapeDeque;
 
-    public ObservableList<Shape> getSelectedShapes() {
-        return selectedShapes;
-    }
 
-    public void setSelectedShapes(ObservableList<Shape> selectedShapes) {
-        this.selectedShapes = selectedShapes;
-
-    }
 
     public ObservableList<Shape> getShapes() {
         return shapes;
     }
 
-    public void setColor(Color color) {
-        this.color.set(color);
-    }
-
-    public Color getBorderColor() {
-        return Color.TRANSPARENT;
-    }
-
-    public void setBorderColor(Color borderColor) {
-        this.borderColor.set(borderColor);
-    }
-
-    public void setBorderColorOnSelected(Shape shape){
+    public void setBorderColorOnSelected(Shape shape) {
         shape.setBorderColor(Color.BLACK);
     }
+
     public void setBorderColorOnDeselected(Shape shape) {
         shape.setBorderColor(Color.TRANSPARENT);
     }
-
-    public ObjectProperty<Color> borderColorProperty() {
-        return borderColor;
-    }
-
 
     public Model() {
         this.shapes = FXCollections.observableArrayList(
@@ -76,8 +50,6 @@ public class Model {
 
         this.color = new SimpleObjectProperty<>(Color.RED);
         this.size = new SimpleObjectProperty<>(50);
-
-        this.borderColor = new SimpleObjectProperty<>();
 
         this.undoShapeDeque = new ArrayDeque<>();
         this.selectedShapes = FXCollections.observableArrayList();
@@ -100,26 +72,26 @@ public class Model {
         return size.get();
     }
 
-    public void deleteSelectedShapes() {
-        for (var shape : selectedShapes){
-            shapes.remove(shape);
-        }
-
-    }
-
     @Override
     public String toString() {
         return super.toString();
     }
 
+    public void deleteSelectedShapes() {
+        for (var shape : selectedShapes) {
+            shapes.remove(shape);
+        }
+
+    }
+
     public void changeColorOnShapes() {
-        for (var shape : selectedShapes){
+        for (var shape : selectedShapes) {
             shape.setColor(getColor());
         }
     }
 
     public void changeSizeOnShapes() {
-        for (var shape : selectedShapes){
+        for (var shape : selectedShapes) {
             shape.setSize(getSize());
         }
     }
@@ -137,7 +109,7 @@ public class Model {
     }
 
     public void undo() {
-        if (undoShapeDeque.isEmpty()){
+        if (undoShapeDeque.isEmpty()) {
             System.out.println("deque IS EMPTY");
             return;
         }
@@ -147,11 +119,7 @@ public class Model {
 
     }
 
-    private void addToTemporaryList() {
-        ObservableList<Shape> tempShapeList;
-    }
-
-    public ObservableList<Shape> getTemporaryList(){
+    public ObservableList<Shape> getTemporaryList() {
         ObservableList<Shape> temporaryList = FXCollections.observableArrayList();
 
         for (var shape : shapes) {
@@ -171,6 +139,4 @@ public class Model {
             shape.draw(context);
         }
     }
-
-
 }

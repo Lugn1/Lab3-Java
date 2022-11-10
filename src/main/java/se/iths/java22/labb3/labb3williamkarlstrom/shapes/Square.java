@@ -16,19 +16,19 @@ public class Square extends Shape {
 
     public void draw(GraphicsContext context){
         context.setFill(getBorderColor());
-        context.fillRect(getxPosition() - getSize()/2,
-                getyPosition() - getSize()/2,getSize(),getSize());
+        context.fillRect(getXPosition() - getSize()/2,
+                getYPosition() - getSize()/2,getSize(),getSize());
 
         context.setFill(this.getColor());
-        context.fillRect(getxPosition() - getSize()/2 + 2,
-                getyPosition()- getSize()/2 + 2,getSize() - 4,getSize() - 4);
+        context.fillRect(getXPosition() - getSize()/2 + 2,
+                getYPosition()- getSize()/2 + 2,getSize() - 4,getSize() - 4);
     }
 
 
     @Override
     public boolean checkIfInsideShape(double xMousePos, double yMousePos) {
-        double xPosition = getxPosition() - getSize()/2;
-        double yPosition = getyPosition() - getSize()/2;
+        double xPosition = getXPosition() - getSize()/2;
+        double yPosition = getYPosition() - getSize()/2;
 
         return xMousePos >= xPosition && xMousePos <= xPosition + (getSize() * 2) &&
                 yMousePos >= yPosition &&
@@ -47,8 +47,8 @@ public class Square extends Shape {
         return "<rect fill=\"" + svgColorCode + "\"" +
                 " width=\"" + getSize() + "\"" +
                 " height=\"" + getSize() + "\"" +
-                " x=\"" + getxPosition()  + "\"" +
-                " y=\"" + getyPosition()  + "\" />";
+                " x=\"" + getXPosition()  + "\"" +
+                " y=\"" + getYPosition()  + "\" />";
 
     }
 }

@@ -17,19 +17,19 @@ public class Circle extends Shape {
 
     public void draw(GraphicsContext context){
         context.setFill(getBorderColor());
-        context.fillOval(getxPosition() - getSize()/2,
-                getyPosition() - getSize()/2,getSize(),getSize());
+        context.fillOval(getXPosition() - getSize()/2,
+                getYPosition() - getSize()/2,getSize(),getSize());
 
         context.setFill(this.getColor());
-        context.fillOval(getxPosition() - getSize()/2 + 2,
-                getyPosition() - getSize()/2 + 2,getSize() - 4,getSize() - 4);
+        context.fillOval(getXPosition() - getSize()/2 + 2,
+                getYPosition() - getSize()/2 + 2,getSize() - 4,getSize() - 4);
     }
 
 
     @Override
     public boolean checkIfInsideShape(double xMousePos, double yMousePos) {
-        double xPosition = getxPosition() - getSize()/2;
-        double yPosition = getyPosition() - getSize()/2;
+        double xPosition = getXPosition() - getSize()/2;
+        double yPosition = getYPosition() - getSize()/2;
 
         return xMousePos >= xPosition && xMousePos <= xPosition + getSize() &&
                 yMousePos >= yPosition &&
@@ -44,10 +44,11 @@ public class Circle extends Shape {
     @Override
     public String writeSVG() {
         String svgColorCode = "#" + getColor().toString().substring(2,10);
-        return "<circle fill=\"" + svgColorCode + "\"" +
+        return "<circle cx=\"" + getXPosition() + "\"" +
+                " cy=\"" + getYPosition() + "\"" +
                 " r=\"" + getSize() / 2 + "\"" +
-                " cx=\"" + (getxPosition() + getSize() / 2) +  "\"" +
-                " cy=\"" + (getyPosition() + getSize() / 2) + "\" />";
+                " fill=\"" + svgColorCode + "\"" + "/>";
+
 
     }
 }

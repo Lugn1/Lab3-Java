@@ -1,20 +1,14 @@
 package se.iths.java22.labb3.labb3williamkarlstrom.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import javafx.beans.Observable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import se.iths.java22.labb3.labb3williamkarlstrom.model.*;
 import se.iths.java22.labb3.labb3williamkarlstrom.shapes.Shape;
 import se.iths.java22.labb3.labb3williamkarlstrom.svg.SVGWriter;
-
-import java.util.ArrayList;
 
 
 public class Controller {
@@ -39,12 +33,6 @@ public class Controller {
     public Model model;
     public Button changeSizeButton;
 
-
-    ObservableList<Shape> shapeObservableList = FXCollections.observableArrayList();
-
-    @FXML
-    ListView<Shape> listViewTest = new ListView<>(shapeObservableList);
-
     public void initialize() {
         model = new Model();
 
@@ -60,25 +48,13 @@ public class Controller {
         canvas.setFocusTraversable(true);
         renderCanvas();
 
-        listViewTest.setItems(model.shapes);
+        model.shapes.addListener(this::listChanged);
 
     }
 
-
-    private void drawShapes() {
-        model.drawShapes(context);
-    }
-
-    public void canvasChanged(){
-        //   drawShapes(); TODO onListChanged-observer
-    }
-
-    public void canvasClicked(MouseEvent mouseEvent) {
-
-        drawOnClick(mouseEvent);
+    private void listChanged(Observable observable) {
         renderCanvas();
         drawShapes();
-
     }
 
     private void renderCanvas() {
@@ -87,7 +63,11 @@ public class Controller {
 
     }
 
-    public void drawOnClick(MouseEvent mouseEvent) {
+    private void drawShapes() {
+        model.drawShapes(context);
+    }
+
+    public void canvasClicked(MouseEvent mouseEvent) {
 
         double x = mouseEvent.getX();
         double y = mouseEvent.getY();
@@ -126,38 +106,26 @@ public class Controller {
 
     public void undoLast() {
         model.undo();
-        renderCanvas();
-        drawShapes();
     }
 
     public void changeColorOnSelectedShapes() {
         model.addToUndoDeque();
         model.changeColorOnShapes();
-        renderCanvas();
-        drawShapes();
     }
 
     public void changeSizeOnSelectedShapes() {
         model.addToUndoDeque();
         model.changeSizeOnShapes();
-        renderCanvas();
-        drawShapes();
     }
 
     public void deleteMarkedShapes() {
         model.addToUndoDeque();
         model.deleteSelectedShapes();
-        renderCanvas();
-        drawShapes();
     }
 
-    public void saveFile(ActionEvent actionEvent) {
-    }
-
-    public void saveToFile(MouseEvent mouseEvent) {
+    public void saveToFile() {
         SVGWriter svgFile = new SVGWriter();
         svgFile.saveToFile(model);
-
 
     }
 }

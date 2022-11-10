@@ -1,6 +1,5 @@
 package se.iths.java22.labb3.labb3williamkarlstrom.svg;
 
-import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import se.iths.java22.labb3.labb3williamkarlstrom.model.Model;
