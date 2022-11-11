@@ -1,62 +1,52 @@
 package se.iths.java22.labb3.labb3williamkarlstrom.model;
 
-import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 import se.iths.java22.labb3.labb3williamkarlstrom.shapes.Circle;
 import se.iths.java22.labb3.labb3williamkarlstrom.shapes.Rectangle;
-import se.iths.java22.labb3.labb3williamkarlstrom.shapes.Shape;
-import se.iths.java22.labb3.labb3williamkarlstrom.shapes.Square;
+
 
 class ModelTest {
     Model model = new Model();
 
     @Test
-    void addNewRectangleToShapesObservableList(){
+    void testCheckIfInsideWhenMousePositionsAreInsideShape(){
+        model.shapes.add(new Rectangle(Color.BLUE, 50, 50, 50));
+        model.shapes.add(new Circle(Color.BLUE, 50, 50,25));
 
-        model.shapes.add(new Rectangle(Color.BLUE, 25, 25, 50));
+        double insideXMousePos = 50.0;
+        double insideYMousePos = 50.0;
 
-        var expected = 1;
-        var actual = model.shapes.size();
+        var insideExpected = true;
+        var insideActual = false;
 
-        assertEquals(expected, actual);
+        for (var shape : model.shapes) {
+            if (shape.checkIfInsideShape(insideXMousePos, insideYMousePos)) {
+                insideActual = true;
+            }
+        }
+        assertEquals(insideExpected, insideActual, "Inside positions: should return true");
 
-    }
-
-    @Test
-    void addTheNewShapesFromShapesObservableListToTemporaryListInsideUndoDeque() {
-
-        model.shapes.add(new Rectangle(Color.BLUE, 25, 25, 50));
-        model.shapes.add(new Circle(Color.BLUE, 25, 25, 50));
-        model.shapes.add(new Square(Color.BLUE, 25, 25, 50));
-
-        var expected = 3;
-        var actual = model.getTemporaryList().size();
-
-        assertEquals(expected, actual);
-
-    }
+}
 
     @Test
-    void passShapesFromUndoDequeToShapesObservableList(){
+    void testCheckIfInsideWhenMousePositionsAreOutsideShape(){
+        model.shapes.add(new Rectangle(Color.BLUE, 50, 50, 50));
+        model.shapes.add(new Circle(Color.BLUE, 50, 50,25));
 
-        model.shapes.add(new Rectangle(Color.BLUE, 25, 25, 50));
-        model.shapes.add(new Circle(Color.BLUE, 25, 25, 50));
-        model.shapes.add(new Square(Color.BLUE, 25, 25, 50));
+        double outsideXMousePos = 10;
+        double outsideYMousePos = 10;
 
-        ObservableList<Shape> temporaryList = model.getTemporaryList();
-        model.undoShapeDeque.addLast(temporaryList);
+        var outsideExpected = false;
+        var outsideActual = false;
 
-        model.shapes.clear();
-        model.shapes.addAll(temporaryList);
+        for (var shape : model.shapes) {
+            if (shape.checkIfInsideShape(outsideXMousePos, outsideYMousePos)) {
+                outsideActual = true;
+            }
+        }
 
-        var expected = 3;
-        var actual = model.shapes.size();
-
-        assertEquals(expected, actual);
-
+        assertEquals(outsideExpected, outsideActual, "Outside positions: should return false");
     }
 }

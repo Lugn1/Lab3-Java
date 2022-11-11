@@ -47,8 +47,8 @@ public class Square extends Shape {
         return "<rect fill=\"" + svgColorCode + "\"" +
                 " width=\"" + getSize() + "\"" +
                 " height=\"" + getSize() + "\"" +
-                " x=\"" + getXPosition()  + "\"" +
-                " y=\"" + getYPosition()  + "\" />";
+                " x=\"" + (getXPosition() - (getSize()/2))  + "\"" +
+                " y=\"" + (getYPosition() - (getSize()/2))  + "\" />";
 
     }
 }

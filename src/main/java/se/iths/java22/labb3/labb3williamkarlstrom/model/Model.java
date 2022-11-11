@@ -24,7 +24,6 @@ public class Model {
     public Deque<ObservableList<Shape>> undoShapeDeque;
 
 
-
     public ObservableList<Shape> getShapes() {
         return shapes;
     }
@@ -109,10 +108,8 @@ public class Model {
     }
 
     public void undo() {
-        if (undoShapeDeque.isEmpty()) {
-            System.out.println("deque IS EMPTY");
+        if (undoShapeDeque.isEmpty())
             return;
-        }
 
         shapes.clear();
         shapes.addAll(undoShapeDeque.removeLast());

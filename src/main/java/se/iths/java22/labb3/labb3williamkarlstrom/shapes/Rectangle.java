@@ -46,8 +46,8 @@ public class Rectangle extends Shape {
         String svgColorCode = "#" + getColor().toString().substring(2,10);
 
         return "<rect fill=\"" + svgColorCode +
-                "\" x=\"" + getXPosition() +
-                "\" y=\"" + getYPosition() +
+                "\" x=\"" + (getXPosition() - (getSize()/2)) +
+                "\" y=\"" + (getYPosition() - (getSize()/2)) +
                 "\" width=\"" + (getSize() * 2) +
                 "\" height=\"" + getSize() +
                 "\" />";

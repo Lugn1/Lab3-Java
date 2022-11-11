@@ -27,9 +27,7 @@ public class SVGWriter {
         } catch (IOException e){
             e.printStackTrace();
         }
-
     }
-
 
 
     private void newFileChooser() {
@@ -45,8 +43,6 @@ public class SVGWriter {
 
     }
 
-
-
     private String getHeaderOfSvgString() {
         return String.join(" ",
                 "<svg",
@@ -60,6 +56,5 @@ public class SVGWriter {
     private String svgEnding() {
         return "</svg>";
     }
-
 
 }
